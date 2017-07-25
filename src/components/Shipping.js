@@ -59,9 +59,17 @@ export default class QAComplete extends React.Component {
     const shippedRobotsList = this.props.robots.filter(robot => robot.shipped);
     if (shippedRobotsList.length > 0) {
       return(
-        <input type="button" className="btn btn-primary" value="Send Shipment" onClick={()=>{alert('Shipped!')}}/>
+        <input type="button" className="btn btn-primary" value="Send Shipment" onClick={()=>{this.sendShipment()}}/>
       );
     }
+  }
+
+  sendShipment() {
+    const shippedRobotsList = this.props.robots.filter(robot => robot.shipped);
+    const idOfShippedRobots = shippedRobotsList.map(robot => {
+      return robot.id;
+    });
+    this.props.createNewShipment(idOfShippedRobots);
   }
 
   render() {

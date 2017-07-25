@@ -1,4 +1,4 @@
-import { FETCH_ROBOTS, UPDATE_ROBOT_QA_CATEGORY, ADD_TO_SHIPPING, REMOVE_FROM_SHIPPING } from '../actions';
+import { FETCH_ROBOTS, UPDATE_ROBOT_QA_CATEGORY, ADD_TO_SHIPPING, REMOVE_FROM_SHIPPING, CREATE_SHIPMENT } from '../actions';
 
 export const RobotsReducer = (state = [], action) => {
   switch (action.type) {
@@ -35,16 +35,19 @@ export const RobotsReducer = (state = [], action) => {
         }
       });
     case REMOVE_FROM_SHIPPING:
-    return state.map(robot => {
-      if (robot.id !== action.robot.id) {
-        return robot;
-      }
+      return state.map(robot => {
+        if (robot.id !== action.robot.id) {
+          return robot;
+        }
 
-      return {
-        ...robot,
-        shipped: false
-      }
-    });
+        return {
+          ...robot,
+          shipped: false
+        }
+      });
+    case CREATE_SHIPMENT:
+      alert(action.payload.data);
+      return state;
     default:
       return state;
   }

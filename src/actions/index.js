@@ -16,10 +16,13 @@ export const ADD_TO_QA_PASS = "ADD_TO_QA_PASS";
 export const ADD_TO_SHIPPING = "ADD_TO_SHIPPING";
 export const REMOVE_FROM_SHIPPING = "REMOVE_FROM_SHIPPING";
 
-const url = 'http://localhost:8080/api/robots';
+export const CREATE_SHIPMENT = "CREATE_SHIPMENT";
+
+const FETCH_BATCH_URL = 'http://localhost:8080/api/robots';
+const CREATE_SHIPMENT_URL = 'http://localhost:8080/shipment/create';
 
 export const fetchRobots = () => {
-  let request = axios.get(url);
+  let request = axios.get(FETCH_BATCH_URL);
   return {
     type: FETCH_ROBOTS,
     payload: request
@@ -68,5 +71,14 @@ export const removeFromShipping = (robot) => {
   return {
     type: REMOVE_FROM_SHIPPING,
     robot
+  }
+};
+
+export const createNewShipment = (arrayOfIds) => {
+  const URL = `${CREATE_SHIPMENT_URL}?array=${JSON.stringify(arrayOfIds)}`;
+  const request = axios.post(URL);
+  return {
+    type: CREATE_SHIPMENT,
+    payload: request
   }
 };
