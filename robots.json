@@ -27,13 +27,13 @@
     "id": 3,
     "name": "Robot Three",
     "configuration": {
-      "hasSentience": false,
+      "hasSentience": true,
       "hasWheels": true,
       "hasTracks": false,
       "numberOfRotors": 6,
       "Colour": "red"
     },
-    "statuses": [ "loose screws", "rusty" ]
+    "statuses": []
   },
   {
     "id": 4,

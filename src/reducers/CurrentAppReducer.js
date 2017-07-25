@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import {
   ON_LOAD,
   QA_START,

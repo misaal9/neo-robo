@@ -7,12 +7,14 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import LandingPage from './containers/LandingPage';
-import QAComplete from './components/QAComplete';
+import Shipping from './containers/Shipping';
 import RootReducer from './reducers';
 
 //let store = createStore(rootReducer);
 
 const connectWithReduxMiddleWare = applyMiddleware(ReduxPromise)(createStore);
+const store = connectWithReduxMiddleWare(RootReducer);
+export default store; //TEST only.
 
 class Root extends React.Component {
   render() {
@@ -21,7 +23,7 @@ class Root extends React.Component {
         <BrowserRouter>
           <div>
             <Switch>
-              <Route path="/qaComplete" component={ QAComplete } />
+              <Route path="/shipping" component={ Shipping } />
               <Route path="/" component={ LandingPage } />
             </Switch>
           </div>
@@ -32,5 +34,5 @@ class Root extends React.Component {
 };
 
 ReactDOM.render(
-  <Root store={connectWithReduxMiddleWare(RootReducer)} />, document.getElementById('root'));
+  <Root store={store} />, document.getElementById('root'));
 registerServiceWorker();

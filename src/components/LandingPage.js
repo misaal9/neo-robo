@@ -1,10 +1,14 @@
+/*eslint-disable*/
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   ON_LOAD,
   QA_IN_PROGRESS,
   QA_COMPLETE,
   CHANGE_APP_STATUS
 } from '../actions';
+import { categorizeRobots } from '../util/categorizeRobots';
+import STORE from '../index';
 
 export const ROBOT_STATUS = {
   ON_FIRE: "on fire",
@@ -15,6 +19,7 @@ export const ROBOT_STATUS = {
 
 class LandingPage extends React.Component {
   componentDidMount(){
+    // load robots from batch
     this.props.fetchRobots();
   }
 
@@ -32,38 +37,63 @@ class LandingPage extends React.Component {
 
   startQA() {
     this.props.changeAppStatus(QA_IN_PROGRESS);
-    this.categorizeRobots(this.props.robots);
+    categorizeRobots(this.props.robots, this.props.addToRecycle, this.props.addToExtinguish, this.props.updateRobotQaCategory);
+    this.props.changeAppStatus(QA_COMPLETE);
   }
 
-  showButtonText() {
-    switch (this.props.currentAppState) {
-      case ON_LOAD:
-        return "Start QA"
-      case QA_IN_PROGRESS:
-        return "Please wait..."
-      case QA_COMPLETE:
-        return "See Results"
+  renderButton() {
+    let label = "Start QA";
+    // switch (this.props.currentAppState) {
+    //   case ON_LOAD:
+    //     label = "Start QA";
+    //   case QA_IN_PROGRESS:
+    //     label = "Please wait...";
+    //   case QA_COMPLETE:
+    //     label = "Start Shipping";
+    // }
+
+    if (this.props.currentAppState !== QA_COMPLETE) {
+      return (
+        <input type="button" value={label} onClick={this.startQA.bind(this)} />
+      );
+    } else {
+      return(
+        <input type="button" value="Start Shipping" onClick={() => {this.props.history.push('/shipping')}}/>
+      );
     }
   }
 
-  categorizeRobots(robots) {
-    robots.forEach(robot => {
-
-
-    });
+  renderMessage = () => {
+    switch (this.props.currentAppState) {
+      case ON_LOAD:
+        return `Batch has been loaded with ${this.props.robots.length} robots.`
+      case QA_IN_PROGRESS:
+        return "Please wait. Your batch is being processed"
+      case QA_COMPLETE:
+        return "QA complete. Click button start shipping"
+      default:
+        return "App state out of sync"
+    }
   }
 
+  /*renderShippingButton = () => {
+    if (this.props.currentAppState === QA_COMPLETE) {
+      return(
+
+      );
+    }
+  }*/
+
   render() {
-    console.log(this.props.currentAppState);
     return (
       <div className="landing-page">
         <h3>Robot Factory</h3>
         <div>
-          {this.props.currentAppState === ON_LOAD ? <span>App is loaded with batch of {this.props.robots.length} robots</span> : <span>QA Started...</span>}
+          {this.renderMessage()}
         </div>
         <p></p>
         <div>
-          <input type="button" value={this.showButtonText()} onClick={this.startQA.bind(this)}/>
+          {this.renderButton()}
         </div>
       </div>
     );
