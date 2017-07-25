@@ -43,22 +43,14 @@ class LandingPage extends React.Component {
 
   renderButton() {
     let label = "Start QA";
-    // switch (this.props.currentAppState) {
-    //   case ON_LOAD:
-    //     label = "Start QA";
-    //   case QA_IN_PROGRESS:
-    //     label = "Please wait...";
-    //   case QA_COMPLETE:
-    //     label = "Start Shipping";
-    // }
 
     if (this.props.currentAppState !== QA_COMPLETE) {
       return (
-        <input type="button" value={label} onClick={this.startQA.bind(this)} />
+        <input className="btn btn-danger" type="button" value={label} onClick={this.startQA.bind(this)} />
       );
     } else {
       return(
-        <input type="button" value="Start Shipping" onClick={() => {this.props.history.push('/shipping')}}/>
+        <input className="btn btn-primary" type="button" value="Start Shipping" onClick={() => {this.props.history.push('/shipping')}}/>
       );
     }
   }
@@ -66,7 +58,7 @@ class LandingPage extends React.Component {
   renderMessage = () => {
     switch (this.props.currentAppState) {
       case ON_LOAD:
-        return `Batch has been loaded with ${this.props.robots.length} robots.`
+        return `Batch has been loaded with ${this.props.robots.length} robots. Click button to continue.`
       case QA_IN_PROGRESS:
         return "Please wait. Your batch is being processed"
       case QA_COMPLETE:
@@ -76,19 +68,11 @@ class LandingPage extends React.Component {
     }
   }
 
-  /*renderShippingButton = () => {
-    if (this.props.currentAppState === QA_COMPLETE) {
-      return(
-
-      );
-    }
-  }*/
-
   render() {
     return (
       <div className="landing-page">
-        <h3>Robot Factory</h3>
-        <div>
+        <h2>Robot Factory</h2>
+        <div className="alert alert-success">
           {this.renderMessage()}
         </div>
         <p></p>

@@ -1,0 +1,15 @@
+#root.container {
+  margin-top: 30px;
+  text-align: center;
+}
+.list-group-no-border {
+  border: none;
+}
+
+/* ShippingList component */
+.shipping-list .action-button {
+  margin: 20px;
+}
+.shipping-list .table thead th {
+  text-align: center;
+}

@@ -10,6 +10,8 @@ import LandingPage from './containers/LandingPage';
 import Shipping from './containers/Shipping';
 import RootReducer from './reducers';
 
+import './styles/style.css';
+
 //let store = createStore(rootReducer);
 
 const connectWithReduxMiddleWare = applyMiddleware(ReduxPromise)(createStore);

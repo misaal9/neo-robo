@@ -205,7 +205,7 @@
   },
   {
     "id": 18,
-    "name": "Robot Eightteen",
+    "name": "Robot Eighteen",
     "configuration": {
       "hasSentience": false,
       "hasWheels": true,
@@ -217,7 +217,7 @@
   },
   {
     "id": 19,
-    "name": "Robot Ninetteen",
+    "name": "Robot Nineteen",
     "configuration": {
       "hasSentience": false,
       "hasWheels": false,
