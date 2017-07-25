@@ -27,6 +27,11 @@ The app runs even if these files are present, but I've run into some issues, and
 - If you see a 404 on any XHR request, you may need to restart express.
 - For example, you see a successful XHR call to /api/robots in networks tab, if all has gone well.
 
+## About robots.json
+- `robots.json` should contains list of robots in batch.
+- Some values have already been added for testing, but feel free to add your own in valid JSON format.
+- Ensure IDs of every robot is unique.
+
 ## Note
 - I've been getting some errors (unexpected end of JSON input) when API calls are being made to save IDs to extinguish, recycle JSON files.
 - To resolve this, I deleted the 3 newly created JSON files (shipment.json, extinguish.json, recycle.json), and restarted my servers.
