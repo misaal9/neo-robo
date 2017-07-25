@@ -18,8 +18,13 @@ export const REMOVE_FROM_SHIPPING = "REMOVE_FROM_SHIPPING";
 
 export const CREATE_SHIPMENT = "CREATE_SHIPMENT";
 
+export const ADD_TO_EXTINGUISH_API = "ADD_TO_EXTINGUISH_API";
+export const ADD_TO_RECYCLE_API = "ADD_TO_RECYCLE_API";
+
 const FETCH_BATCH_URL = 'http://localhost:8080/api/robots';
-const CREATE_SHIPMENT_URL = 'http://localhost:8080/shipment/create';
+const CREATE_SHIPMENT_URL = 'http://localhost:8080/api/shipment/create';
+const EXTINGUISH_URL = 'http://localhost:8080/api/robots/extinguish';
+const RECYCLE_URL = 'http://localhost:8080/api/robots/recycle';
 
 export const fetchRobots = () => {
   let request = axios.get(FETCH_BATCH_URL);
@@ -79,6 +84,24 @@ export const createNewShipment = (arrayOfIds) => {
   const request = axios.post(URL);
   return {
     type: CREATE_SHIPMENT,
+    payload: request
+  }
+};
+
+export const addApiToExtinguishFile = (id) => {
+  const URL = `${EXTINGUISH_URL}/${JSON.stringify(id)}`;
+  const request = axios.post(URL);
+  return {
+    type: ADD_TO_EXTINGUISH_API,
+    payload: request
+  }
+};
+
+export const addApiToRecycleFile = (id) => {
+  const URL = `${RECYCLE_URL}/${JSON.stringify(id)}`;
+  const request = axios.post(URL);
+  return {
+    type: ADD_TO_RECYCLE_API,
     payload: request
   }
 };

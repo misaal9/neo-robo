@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LandingPage from '../components/LandingPage';
-import { fetchRobots, changeAppStatus, addToRecycle, addToExtinguish, updateRobotQaCategory } from '../actions';
+import { fetchRobots, changeAppStatus, addToRecycle, addToExtinguish, updateRobotQaCategory, addApiToExtinguishFile, addApiToRecycleFile } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchRobots, changeAppStatus, addToRecycle, addToExtinguish, updateRobotQaCategory }, dispatch);
+  return bindActionCreators({ fetchRobots, changeAppStatus, addToRecycle, addToExtinguish, updateRobotQaCategory, addApiToExtinguishFile, addApiToRecycleFile }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

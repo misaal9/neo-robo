@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ADD_TO_RECYCLED, ADD_TO_EXTINGUISH, ADD_TO_FACTORY_SECOND, ADD_TO_QA_PASS } from '../actions';
+import { ADD_TO_RECYCLED, ADD_TO_EXTINGUISH, ADD_TO_FACTORY_SECOND, ADD_TO_QA_PASS, ADD_TO_EXTINGUISH_API, ADD_TO_RECYCLE_API } from '../actions';
 import STORE from '../index';
 
 const ROBOT_STATUS = {
@@ -16,16 +16,17 @@ const COLOR = {
 };
 
 
-const filterToCategory = (robotItem, addToExtinguish, addToRecycle, updateRobotQaCategory) => {
+const filterToCategory = (robotItem, addToExtinguish, addToRecycle, updateRobotQaCategory, addApiToExtinguishFile, addApiToRecycleFile) => {
   const { configuration, statuses, id } = robotItem;
 
   // extinguish
   if (configuration.hasSentience && (_.indexOf(statuses, ROBOT_STATUS.ON_FIRE) > -1)) {
-    //console.log(`Extinguish ${robotItem.name}`);
     // update the state.extinguish array
     addToExtinguish(robotItem);
     // update the robot with qaCategory
     updateRobotQaCategory(id, ADD_TO_EXTINGUISH);
+    // send API call to add ID to JSON file
+    addApiToExtinguishFile(id);
   }
 
   // recycle
@@ -40,6 +41,8 @@ const filterToCategory = (robotItem, addToExtinguish, addToRecycle, updateRobotQ
     addToRecycle(robotItem);
     // update the robot item with qaCategory
     updateRobotQaCategory(id, ADD_TO_RECYCLED);
+    // send API call to add ID to JSON file
+    addApiToRecycleFile(id);
   }
 };
 
@@ -89,10 +92,10 @@ const sortForShipping = (robot, updateRobotQaCategory) => {
   }
 }
 
-export const categorizeRobots = (robotsArray, addToRecycle, addToExtinguish, updateRobotQaCategory) => {
+export const categorizeRobots = (robotsArray, addToRecycle, addToExtinguish, updateRobotQaCategory, addApiToExtinguishFile, addApiToRecycleFile) => {
   // filter out extinguish and recycled items
   robotsArray.forEach(robot => {
-    filterToCategory(robot, addToRecycle, addToExtinguish, updateRobotQaCategory);
+    filterToCategory(robot, addToRecycle, addToExtinguish, updateRobotQaCategory, addApiToExtinguishFile, addApiToRecycleFile);
   });
   // filter out for shipping
   let robotsForShipping = STORE.getState().robots.filter(robot => {

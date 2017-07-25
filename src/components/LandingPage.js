@@ -37,7 +37,7 @@ class LandingPage extends React.Component {
 
   startQA() {
     this.props.changeAppStatus(QA_IN_PROGRESS);
-    categorizeRobots(this.props.robots, this.props.addToRecycle, this.props.addToExtinguish, this.props.updateRobotQaCategory);
+    categorizeRobots(this.props.robots, this.props.addToRecycle, this.props.addToExtinguish, this.props.updateRobotQaCategory, this.props.addApiToExtinguishFile, this.props.addApiToRecycleFile);
     this.props.changeAppStatus(QA_COMPLETE);
   }
 

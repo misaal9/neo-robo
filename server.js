@@ -105,7 +105,7 @@ app.post('/api/robots/recycle/:id', (req, res) => {
 });
 
 // post to create shipment list
-app.post('/shipment/create', (req, res) => {
+app.post('/api/shipment/create', (req, res) => {
   const shipmentRobotIds = req.query.array;
   fs.writeFile(shipmentFile, shipmentRobotIds, 'utf8', (err, result) => {
     if (err) {

@@ -1,4 +1,4 @@
-import { FETCH_ROBOTS, UPDATE_ROBOT_QA_CATEGORY, ADD_TO_SHIPPING, REMOVE_FROM_SHIPPING, CREATE_SHIPMENT } from '../actions';
+import { FETCH_ROBOTS, UPDATE_ROBOT_QA_CATEGORY, ADD_TO_SHIPPING, REMOVE_FROM_SHIPPING, CREATE_SHIPMENT, ADD_TO_EXTINGUISH_API, ADD_TO_RECYCLE_API } from '../actions';
 
 export const RobotsReducer = (state = [], action) => {
   switch (action.type) {
@@ -46,7 +46,13 @@ export const RobotsReducer = (state = [], action) => {
         }
       });
     case CREATE_SHIPMENT:
-      alert(action.payload.data);
+      console.log(`Response from server: ${action.payload.data} See shipment.json to confirm new IDs added.`);
+      return state;
+    case ADD_TO_EXTINGUISH_API:
+      console.log(`Response from server: ${action.payload.data} See extinguish.json to confirm new IDs added.`);
+      return state;
+    case ADD_TO_RECYCLE_API:
+      console.log(`Response from server: ${action.payload.data} See recycle.json to confirm new IDs added.`);
       return state;
     default:
       return state;
